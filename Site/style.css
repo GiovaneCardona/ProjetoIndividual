@@ -71,3 +71,8 @@ li a:hover{
 .Logo:hover{
     transform: scale(1.05);
 }
+.jogador{
+    margin-top: 93px;
+   width: 100%;
+height: 100%;
+}
