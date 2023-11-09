@@ -73,23 +73,22 @@ li a:hover{
     transform: scale(1.05);
 }
 .img_jogador{
-    background-image: url(../Assets/imgfundo.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../Assets/imgfundo.jpg);
     background-repeat: repeat-y;
     width: 100%;
     background-size: 100%;
     height: 42vw;
     display: flex;
     align-items: center;
+    justify-content: end;
     
 }
 .conteudo_banner{
-    position: absolute;
-    top: 40%;
-    left: 55%;
+    
     color: #fff;
     text-align: center;
     font-size: 22px;
-    z-index: 2;
+    
 }
 .botao{
     background-color: rgb(66, 184, 199);
