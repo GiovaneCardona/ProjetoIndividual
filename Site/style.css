@@ -68,6 +68,7 @@ li a:hover {
     height: 100%;
     width: 350px;
     margin-right: 30px;
+    transition: 0.7s;
 }
 
 .header a {
@@ -86,7 +87,7 @@ li a:hover {
     height: 80vh;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
 
 }
 
@@ -119,6 +120,19 @@ li a:hover {
     height: 70vh;
     display: flex;
     align-items: center;
+}
+.linha{
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 100%;
+    width: 20px;
+
+}
+.linhaFora{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
 }
 
 .slider {
@@ -173,7 +187,7 @@ li a:hover {
 }
 
 .manual-btn:hover {
-    background-color: white;
+    background-color: #fff;
 }
 
 #radio1:checked ~ .first {
@@ -190,6 +204,7 @@ li a:hover {
 }
 
 .nav_auto div{
+    display: flex;
     border: 2px solid white;
     padding: 5px;
     border-radius: 10px;
