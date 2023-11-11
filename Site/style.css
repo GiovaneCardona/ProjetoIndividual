@@ -95,24 +95,24 @@ li a:hover {
 
     color: #fff;
     text-align: center;
-    font-size: 22px;
+    font-size: 30px;
 
 }
 
 .botao {
-    background-color: rgb(66, 184, 199);
+    background-color: rgb(11, 83, 93);
     border-radius: 10px;
-    width: 150px;
-    height: 40px;
+    width: 200px;
+    height: 60px;
     color: white;
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
     border: 0;
 }
 
 .botao:hover {
     transform: scale(1.1);
-    background-color: rgb(8, 95, 107);
+    background-color: rgb(33, 169, 187);
     transition: all 0.5s;
 }
 
