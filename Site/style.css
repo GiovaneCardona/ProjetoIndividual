@@ -107,6 +107,7 @@ li a:hover {
     color: white;
     font-size: 18px;
     cursor: pointer;
+    border: 0;
 }
 
 .botao:hover {
@@ -120,6 +121,7 @@ li a:hover {
     height: 70vh;
     display: flex;
     align-items: center;
+    justify-content: end;
 }
 .linha{
     background-color: rgba(255, 255, 255, 0.7);
@@ -235,4 +237,11 @@ li a:hover {
     background-color: white;
 }#radio4:checked ~ .nav_auto .auto-btn4{
     background-color: white;
+}
+
+.campeoes{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
