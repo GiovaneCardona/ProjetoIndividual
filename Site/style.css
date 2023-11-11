@@ -317,3 +317,17 @@ li a:hover {
     align-items: center;
     justify-content: center;
 }
+
+.sobreMim{
+    background-color: #304264;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.texto_sobre_mim{
+    color: white;
+    width: 50%;
+}
+
