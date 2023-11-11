@@ -244,4 +244,20 @@ li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
+.NomesCampeoes{
+    width: 600px;
+    height: 300px;
+    background-color: rgba(128, 128, 128, 0.461);
+    
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nomes{
+    color: white;
+    font-weight: bold;
+}
+
