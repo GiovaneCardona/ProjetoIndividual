@@ -3,6 +3,9 @@
     src: url(../Assets/RobotoMono-VariableFont_wght.ttf);
 }
 
+html{
+    scroll-behavior: smooth;
+}
 
 .header {
     background-color: #495560;
@@ -28,9 +31,9 @@ body {
 .Navbar {
     color: #ffffff;
     margin: 0;
-    width: 20%;
+    width: 30%;
     align-items: center;
-
+    margin-right: 50px;
 }
 
 ul {
@@ -124,8 +127,8 @@ li a:hover {
     border: 2px solid #495057;
     background: #495057;
     border-radius: 10px;
-  }
-  
+}
+
 
 
 .botao:hover {
@@ -318,7 +321,7 @@ li a:hover {
     justify-content: center;
 }
 
-.sobreMim{
+.sobreMim {
     background-color: #304264;
     width: 100%;
     height: 70vh;
@@ -326,8 +329,8 @@ li a:hover {
     justify-content: center;
     align-items: center;
 }
-.texto_sobre_mim{
+
+.texto_sobre_mim {
     color: white;
     width: 50%;
 }
-
