@@ -339,3 +339,12 @@ li a:hover {
     justify-content: center;
 }
 
+.footer{
+    background-color: #495560;
+    height: 10vh;
+    color: white;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
