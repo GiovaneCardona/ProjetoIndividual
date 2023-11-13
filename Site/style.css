@@ -124,20 +124,14 @@ li a:hover {
     position: relative;
     display: inline-block;
     outline: none;
-    border: 2px solid #495057;
-    background: #495057;
-    border-radius: 10px;
-}
-
-
-
-.botao:hover {
-    color: black;
-    transform: scale(1.1);
-    background-color: rgb(255, 255, 255);
-    transition: all 0.5s;
-    border: 2px solid rgb(46, 46, 120);
-}
+    border-radius: 20px;
+    border: 2px solid #adb5bd;
+    background: #adb5bd;
+  }
+  .botao:hover {
+    background: #fff;
+    color: #adb5bd
+  }
 
 .sessao_carrossel {
     background-color: #304264;
