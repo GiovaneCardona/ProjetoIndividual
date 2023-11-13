@@ -11,12 +11,15 @@ html{
     background-color: #495560;
     display: flex;
     margin: 0px;
-    padding: 0px;
-    width: 100%;
+    padding: 0 60px;
     height: 10vh;
     top: 0;
     left: 0;
     justify-content: space-between;
+}
+
+.container{
+    padding: 0 60px;
 }
 
 body {
@@ -302,7 +305,7 @@ li a:hover {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 100px;
     margin-left: 30px;
     text-align: justify;
     font-size: 18px;
