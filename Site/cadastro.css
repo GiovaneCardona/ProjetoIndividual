@@ -30,7 +30,7 @@ body {
 .QuadradoCadastro {
     background-color: rgba(255, 255, 255, 0.437);
     height: 700px;
-    width: 700px;
+    width: 600px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
