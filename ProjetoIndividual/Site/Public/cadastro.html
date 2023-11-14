@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastro.css">
+    <title>Cadastro</title>
+</head>
+
+<body style="background-color:#304264;">
+
+
+    <div class="cadastro">
+        <div class="linhaForaCadastro">
+            <div class="linha"></div>
+        </div>
+
+        <div class="imagemLateral">
+            <img style="width: 70%; height: 700px; border-radius: 20px; filter: brightness(50%); "
+                src="https://i.pinimg.com/564x/87/6f/f2/876ff20173bb17270833ce1c85913ff8.jpg" alt="">
+        </div>
+
+        <div class="QuadradoCadastro">
+            <h1 style="color: #ffffff;">Faça seu cadastro</h1>
+            <input class="inputs" placeholder="Nome" type="text" id="input_nome">
+            <input class="inputs" placeholder="E-mail" type="text" id="input_email">
+            <input class="inputs" placeholder="Senha" type="text" id="input_Senha">
+            <input class="inputs" placeholder="Confirme sua senha" type="text" id="input_Senha_Confirm">
+            <input placeholder="Idade que começou a jogar" type="number" class="inputs" id="input_idade"><br>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button><br> <a href="index.html"><button class="botao">Voltar</button></a>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function cadastrar() {
+    
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var emailVar = input_email.value;
+    var senhaVar = input_Senha.value;
+    var confirmacaoSenhaVar = input_Senha_Confirm.value;
+    var idadeVar = input_idade.value;
+    var nomeVar = input_nome.value;
+    if (
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      idadeVar == "" ||
+      nomeVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      return false;
+    } else {
+      setInterval( 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        confirmacaoSenhaServer: confirmacaoSenhaVar,
+        idadeServer: idadeVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        //   cardErro.style.display = "block";
+
+          alert("aaaa")
+
+        //   mensagem_erro.innerHTML =
+        //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          
+          
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        
+      });
+
+    return false;
+  }
+</script>
