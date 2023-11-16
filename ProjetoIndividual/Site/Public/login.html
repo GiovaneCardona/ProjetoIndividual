@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="cadastro.css">
 </head>
+
 <body>
+
     <body style="background-color:#304264;">
 
 
@@ -14,38 +17,39 @@
             <div class="linhaForaCadastro">
                 <div class="linha"></div>
             </div>
-    
+
             <div class="imagemLateral">
                 <img style="width: 70%; height: 700px; border-radius: 20px; filter: brightness(50%); "
                     src="https://i.pinimg.com/564x/87/6f/f2/876ff20173bb17270833ce1c85913ff8.jpg" alt="">
             </div>
-    
+
             <div class="QuadradoCadastro">
                 <h1 style="color: #ffffff;">Login</h1>
                 <input class="inputs" placeholder="E-mail" type="text" id="input_email">
                 <input class="inputs" placeholder="Senha" type="text" id="input_Senha"><bR>
-                <button class="botao" onclick="entrar()">Entrar</button><br> <a href="index.html"><button class="botao">Voltar</button></a>
-    
+                <button class="botao" onclick="entrar()">Entrar</button><br> <a href="index.html"><button
+                        class="botao">Voltar</button></a>
+
             </div>
         </div>
     </body>
-    
+
 </body>
+
 </html>
 <script>
 
-
     function entrar() {
-
         var emailVar = input_email.value;
         var senhaVar = input_Senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            alert("Você precisa preencher todos os campos!")
+            // inp_email.style.borderColor = 'red'
+            // senhaInput.style.borderColor = 'red'
             return false;
-        }
-        else {
+        } else {
             setInterval(5000)
+            // div_aguardar.style.display = 'flex';
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -66,6 +70,7 @@
             if (resposta.ok) {
                 console.log(resposta);
 
+
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
@@ -75,26 +80,23 @@
                     // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
+                        alert('aaa')
+                        window.location = "./index.html";
+                    }, 1000);
                 });
-
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    
                 });
             }
-
         }).catch(function (erro) {
             console.log(erro);
-        })
+        });
 
         return false;
+
     }
 
     // function sumirMensagem() {
