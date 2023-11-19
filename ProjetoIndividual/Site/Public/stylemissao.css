@@ -31,7 +31,7 @@
 }
 
 body {
-    height: 90vh;
+    height: 100vhad;
     width: 100%;
     font-family: "Fonte_Site";
     margin: 0;
@@ -85,4 +85,10 @@ a {
     align-items: center;
     justify-content: center;
     margin-left:0px;
+}
+
+.cardsMissao{
+    background-color: black;
+    width: 100%;
+    height: 20vh;
 }
