@@ -46,7 +46,7 @@ body {
 
 .barraLateral {
     background-color: #3E7EA3;
-    width: 26vh;
+    width: 23vh;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -89,9 +89,38 @@ a {
 }
 
 .cardsMissao{
-    position: absolute;
+    position: fixed;
     background-color: #ffffff;
     width: 93%;
-    height: 90vh;
-    margin-left: 26vh;
+    height: 50%;
+    margin-left: 23vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    
 }
+
+.cardsMissao2{
+    position: fixed;
+    background-color: #ffffff;
+    width: 93%;
+    height: 50%;
+    margin-left: 23vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 40vh;
+}
+
+.card{
+    z-index: 1;
+    border: solid black 2px;
+    height: 200px;
+    width: 400px;
+    border-radius: 20px;
+    padding: 10px;
+    color: black;
+}
+
