@@ -36,3 +36,11 @@ function nextImage() {
 
 }
 
+
+const card1 = document.querySelector("button");
+
+const modal = document.querySelector("dialog");
+
+card1.onclick = function(){
+    modal.showModal()
+}
