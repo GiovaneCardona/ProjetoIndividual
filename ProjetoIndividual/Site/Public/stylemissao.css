@@ -138,6 +138,8 @@ a {
     font-family: Fonte_Site;
     font-size: 15px;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .botoesMissao:hover {
@@ -189,4 +191,10 @@ a {
 
   .mission{
     border-radius: 20px;
+  }
+
+  .destaque{
+    color: rgb(34, 170, 207);
+     font-weight: bold;
+     
   }
