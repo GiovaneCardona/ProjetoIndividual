@@ -28,12 +28,12 @@
     </div>
     <div class="barraLateral">
         <div class="oláUser">
-           <p>Olá User!</p>
+            <p id="nome_user"></p>
         </div>
         
 
         <div class="botões-lateral">
-           <a href=""> <p style="margin: 15px;">Missões</p></a>
+           <a href="Missoes.html"> <p style="margin: 15px;">Missões</p></a>
            <a href=""> <p style="margin: 15px;">Jogar pong</p></a>
            <a href=""> <p style="margin: 15px;">Perfil</p></a>
         </div>
@@ -53,3 +53,6 @@
 </html>
 </body>
 </html>
+<script>
+    document.getElementById("nome_user").innerHTML = "Olá " + sessionStorage.NOME_USUARIO
+</script>

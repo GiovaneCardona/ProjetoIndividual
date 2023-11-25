@@ -19,9 +19,10 @@
             </div>
         </a>
     </div>
+    <div id="exibir"></div>
     <div class="barraLateral">
         <div class="oláUser">
-            <p>Olá User!</p>
+            <p id="nome_user"></p>
         </div>
 
 
@@ -29,7 +30,7 @@
             <a href="">
                 <p style="margin: 15px;">Missões</p>
             </a>
-            <a href="">
+            <a href="jogopong.html">
                 <p style="margin: 15px;">Jogar pong</p>
             </a>
             <a href="">
@@ -115,7 +116,7 @@
         <p>Nesta missão você precisará praticar no mínimo 30 minutos do esporte Tênis de mesa<Br><br>
             O objetivo desta missão, é incentivar a prática de esportes, diminuindo o sedentarismo!!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
@@ -131,7 +132,7 @@
             O objetivo desta missão é melhorar a sua memória muscular e servir como um cardio, diminuindo o
             sedentarismo!!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao2()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
@@ -146,7 +147,7 @@
         <p>Nesta missão você precisará repetir no mínimo 50x o movimento de Corte!<Br><br>
             O objetivo desta missão é incentivar a prática de esportes diminuindo o sedentarismo!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao3()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
@@ -161,7 +162,7 @@
         <p>Nesta missão você precisará praticar no mínimo 50x o movimento de recepção de Saque!<Br><br>
             O objetivo desta missão é incentivar a prática de esportes diminuindo o sedentarismo!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao4()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
@@ -176,7 +177,7 @@
         <p>Nesta missão você precisará praticar no mínimo 50x o Movimento de recepção de Corte!<Br><br>
             O objetivo desta missão, é incentivar a prática de esportes, diminuindo o sedentarismo!!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao5()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
@@ -191,16 +192,197 @@
         <p>Nesta missão você precisará ganhar três partidas de tênis de mesa do seu parceiro de treino!<Br><br>
             O objetivo desta missão, é incentivar a prática de esportes, diminuindo o sedentarismo!!</p><br>
 
-        <button onclick="botaoDialog()" class="botaoDialog">Concluir missão!</button>
+        <button onclick="ConcluirMissao6()" class="botaoDialog">Concluir missão!</button>
 
         <!-- </div> -->
     </dialog>
+
+
 
 </body>
 
 </html>
 
 <script>
+
+
+    function ConcluirMissao() {
+
+        fetch('/missoes/Concluir', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idUsuarioServer: sessionStorage.ID_USUARIO,
+                idMissao: 1,
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    // Se o status não for OK (200), exibe o alert
+                    alert('Você ja Concluiu esta missão!');
+                }
+                return response.json(); // Continua o processamento normal se o status for OK
+            })
+            .then(data => {
+                // Continua o processamento com os dados recebidos, se houver
+                console.log(data);
+            })
+            .catch(error => {
+                // Trata erros que podem ocorrer durante a requisição
+                console.error('Erro durante a requisição:', error);
+                alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+            });
+    }
+
+
+    function ConcluirMissao2() {
+
+fetch('/missoes/Concluir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        idUsuarioServer: sessionStorage.ID_USUARIO,
+        idMissao: 2,
+    }),
+})
+    .then(response => {
+        if (!response.ok) {
+            // Se o status não for OK (200), exibe o alert
+            alert('Você ja Concluiu esta missão!');
+        }
+        return response.json(); // Continua o processamento normal se o status for OK
+    })
+    .then(data => {
+        // Continua o processamento com os dados recebidos, se houver
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata erros que podem ocorrer durante a requisição
+        console.error('Erro durante a requisição:', error);
+        alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+    });
+}
+function ConcluirMissao3() {
+
+fetch('/missoes/Concluir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        idUsuarioServer: sessionStorage.ID_USUARIO,
+        idMissao: 3,
+    }),
+})
+    .then(response => {
+        if (!response.ok) {
+            // Se o status não for OK (200), exibe o alert
+            alert('Você ja Concluiu esta missão!');
+        }
+        return response.json(); // Continua o processamento normal se o status for OK
+    })
+    .then(data => {
+        // Continua o processamento com os dados recebidos, se houver
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata erros que podem ocorrer durante a requisição
+        console.error('Erro durante a requisição:', error);
+        alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+    });
+}
+function ConcluirMissao4() {
+
+fetch('/missoes/Concluir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        idUsuarioServer: sessionStorage.ID_USUARIO,
+        idMissao: 4,
+    }),
+})
+    .then(response => {
+        if (!response.ok) {
+            // Se o status não for OK (200), exibe o alert
+            alert('Você ja Concluiu esta missão!');
+        }
+        return response.json(); // Continua o processamento normal se o status for OK
+    })
+    .then(data => {
+        // Continua o processamento com os dados recebidos, se houver
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata erros que podem ocorrer durante a requisição
+        console.error('Erro durante a requisição:', error);
+        alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+    });
+}
+function ConcluirMissao5() {
+
+fetch('/missoes/Concluir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        idUsuarioServer: sessionStorage.ID_USUARIO,
+        idMissao: 5,
+    }),
+})
+    .then(response => {
+        if (!response.ok) {
+            // Se o status não for OK (200), exibe o alert
+            alert('Você ja Concluiu esta missão!');
+        }
+        return response.json(); // Continua o processamento normal se o status for OK
+    })
+    .then(data => {
+        // Continua o processamento com os dados recebidos, se houver
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata erros que podem ocorrer durante a requisição
+        console.error('Erro durante a requisição:', error);
+        alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+    });
+}
+function ConcluirMissao6() {
+
+fetch('/missoes/Concluir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        idUsuarioServer: sessionStorage.ID_USUARIO,
+        idMissao: 6,
+    }),
+})
+    .then(response => {
+        if (!response.ok) {
+            // Se o status não for OK (200), exibe o alert
+            alert('Você ja Concluiu esta missão!');
+        }
+        return response.json(); // Continua o processamento normal se o status for OK
+    })
+    .then(data => {
+        // Continua o processamento com os dados recebidos, se houver
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata erros que podem ocorrer durante a requisição
+        console.error('Erro durante a requisição:', error);
+        alert('Erro durante a requisição. Verifique o console para mais detalhes.');
+    });
+}
+
     const card1 = document.getElementById("Missao1");
     const card2 = document.getElementById("Missao2");
     const card3 = document.getElementById("Missao3");
@@ -234,49 +416,11 @@
         modal6.showModal()
     }
 
-    function botaoDialog() {
-        var pontuacao = 1000;
-
-        fetch("/empresas/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-               pontuacaoServer: pontuacao
-
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    //   cardErro.style.display = "block";
-
-
-                    //   mensagem_erro.innerHTML =
-                    //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000");
+    document.getElementById("nome_user").innerHTML = "Olá " + sessionStorage.NOME_USUARIO
 
 
 
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
 
-            });
-
-        return false;
-
-    }
 
 
 </script>
