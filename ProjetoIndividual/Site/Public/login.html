@@ -46,7 +46,7 @@
         if (emailVar == "" || senhaVar == "") {
             alert('Você não pode deixar campos em branco!')
             return false;
-        }
+        } 
 
 
         console.log("FORM LOGIN: ", emailVar);
@@ -70,7 +70,7 @@
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
-                console.log(resposta);
+                window.location = "./Missoes.html"
 
 
                 resposta.json().then(json => {

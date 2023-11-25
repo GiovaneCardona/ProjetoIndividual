@@ -84,21 +84,22 @@
 
         <button id="Missao4" class="botoesMissao">
             <p>MISSÃO 4:</p>
-            <p>Repetir o movimento de recepção de saque <span class="destaque" >no mínimo 50x!</span></p>
+            <p>Repetir o movimento de recepção de saque <span class="destaque">no mínimo 50x!</span></p>
             <p><span class=" destaque">Vale 1000 Pontos!</span></p>
         </button>
 
         <button id="Missao5" class="botoesMissao">
             <p>MISSÃO 5:</p>
-            <p>Repetir o movimento de recepção de corte  <span class="destaque">no mínimo 50x!</span></p>
-            <p><span class="destaque" >Vale 1000 Pontos!</span></p>
+            <p>Repetir o movimento de recepção de corte <span class="destaque">no mínimo 50x!</span></p>
+            <p><span class="destaque">Vale 1000 Pontos!</span></p>
         </button>
 
 
         <button id="Missao6" class="botoesMissao">
             <p>MISSÃO 6:</p>
-            <p>Ganhar <span class="destaque">três partidas</span> seguidas do seu parceiro de treino no tênis de mesa!</p>
-            <p><span class="destaque" >Vale 1000 pontos!</span></p>
+            <p>Ganhar <span class="destaque">três partidas</span> seguidas do seu parceiro de treino no tênis de mesa!
+            </p>
+            <p><span class="destaque">Vale 1000 pontos!</span></p>
         </button>
 
 
@@ -231,6 +232,50 @@
     }
     card6.onclick = function () {
         modal6.showModal()
+    }
+
+    function botaoDialog() {
+        var pontuacao = 1000;
+
+        fetch("/empresas/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+               pontuacaoServer: pontuacao
+
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    //   cardErro.style.display = "block";
+
+
+                    //   mensagem_erro.innerHTML =
+                    //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+
     }
 
 

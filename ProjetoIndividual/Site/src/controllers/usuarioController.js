@@ -29,7 +29,7 @@ function autenticar(req, res) {
                                 nome: resultadoAutenticar[0].nome,
                                 senha: resultadoAutenticar[0].senha,
                                 idade: resultadoAutenticar[0].idadeinicio
-
+                                
                             });
                         } else {
                             res.status(204).json({ aquarios: [] });
@@ -56,9 +56,9 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var confirmacaoSenha = req.body.confirmacaoSenhaServer;
     var idade = req.body.idadeServer;
     var nome = req.body.nomeServer;
+    var Joga = req.body.jogaAindaServer;
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -67,14 +67,14 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    } else if (confirmacaoSenha == undefined) {
-        res.status(400).send("Sua confirmacao está undefined!");
+    } else if (Joga == undefined) {
+        res.status(400).send("Seu joga está undefined!");
     } else if (idade == undefined) {
         res.status(400).send("Sua idade está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, idade)
+        usuarioModel.cadastrar(nome, email, senha, idade, Joga)
             .then(
                 function (resultado) {
                     res.json(resultado);

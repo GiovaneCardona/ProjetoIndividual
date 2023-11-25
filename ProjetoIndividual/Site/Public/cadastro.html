@@ -2,42 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cadastro.css">
-    <title>Cadastro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cadastro.css">
+  <title>Cadastro</title>
 </head>
 
 <body style="background-color:#1c2e4f;">
 
 
-    <div class="cadastro">
-        <div class="linhaForaCadastro">
-            <div class="linha"></div>
-        </div>
-
-        <div class="imagemLateral">
-            <img style="width: 70%; height: 700px; border-radius: 20px; filter: brightness(50%); "
-                src="https://i.pinimg.com/564x/87/6f/f2/876ff20173bb17270833ce1c85913ff8.jpg" alt="">
-        </div>
-
-        <div class="QuadradoCadastro">
-            <h1 style="color: #ffffff;">Faça seu cadastro</h1>
-            <input class="inputs" placeholder="Nome" type="text" id="input_nome">
-            <input class="inputs" placeholder="E-mail" type="text" id="input_email">
-            <input class="inputs" placeholder="Senha" type="text" id="input_Senha">
-            <input class="inputs" placeholder="Confirme sua senha" type="text" id="input_Senha_Confirm">
-            <input placeholder="Sua idade atual" type="number" class="inputs" id="input_idade"><br>
-            <button class="botao" onclick="cadastrar()">Cadastrar</button><br> <a href="index.html"><button class="botao">Voltar</button></a>
-
-        </div>
+  <div class="cadastro">
+    <div class="linhaForaCadastro">
+      <div class="linha"></div>
     </div>
+
+    <div class="imagemLateral">
+      <img style="width: 70%; height: 700px; border-radius: 20px; filter: brightness(50%); "
+        src="https://i.pinimg.com/564x/87/6f/f2/876ff20173bb17270833ce1c85913ff8.jpg" alt="">
+    </div>
+
+    <div class="QuadradoCadastro">
+      <h1 style="color: #ffffff;">Faça seu cadastro</h1>
+      <input class="inputs" placeholder="Nome" type="text" id="input_nome">
+      <input class="inputs" placeholder="E-mail" type="text" id="input_email">
+      <input class="inputs" placeholder="Senha" type="password" id="input_Senha">
+      <input class="inputs" placeholder="Confirme sua senha" type="password" id="input_Senha_Confirm">
+      <input placeholder="Sua idade atual" type="number" class="inputs" id="input_idade">
+
+      <p>Você ainda joga Tênis de mesa?</p>
+      <div>
+        <input value="Sim" type="radio" name="Joga" id="input_joga">Sim
+        <input value="Não" type="radio" name="Joga" id="input_nao_joga">Não<br><br>
+      </div>
+      <button class="botao" onclick="cadastrar()">Cadastrar</button><br> <a href="index.html"><button
+          class="botao">Voltar</button></a>
+
+    </div>
+  </div>
 </body>
 
 </html>
 <script>
-    function cadastrar() {
-    
+  
+
+  function cadastrar() {
+    var i = 0
+    var opcao = document.getElementsByName("Joga")
+
+    var radioSelecionado = true;
+
+    // Percorre os radios para verificar se algum está selecionado
+    for (; i < opcao.length; i++) {
+      if (opcao[i].checked) {
+        radioSelecionado = false;
+        break;
+      }
+    }
+  // Função para obter o valor do radio selecionado
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -46,6 +67,7 @@
     var confirmacaoSenhaVar = input_Senha_Confirm.value;
     var idadeVar = input_idade.value;
     var nomeVar = input_nome.value;
+    var JogaAinda = opcao[i].value;
     if (
       emailVar == "" ||
       senhaVar == "" ||
@@ -53,13 +75,27 @@
       idadeVar == "" ||
       nomeVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+      alert('Você não pode deixar nenhum campo vazio!')
+    return false;} 
 
+      else if (emailVar.indexOf("@") < 0) {
+      alert('Você Precisa colocar @ no seu e-mail ')
       return false;
-    } else {
-      setInterval( 5000);
+    } else if (emailVar.indexOf(".com") < 0) {
+      alert('Você Precisa colocar .com no seu e-mail ')
+      return false;
+    } else if (confirmacaoSenhaVar != senhaVar) {
+      alert('As suas senhas não podem ser diferentes')
+      return false;
+    } else if (idadeVar < 10) {
+      alert('Você precisa ter pelo menos 10 anos para se cadastrar!')
+      return false;
+    } else if (idadeVar > 105) {
+      alert('Insira uma idade válida')
+      return false;
+    } else if (radioSelecionado) {
+      alert('Responda se joga ainda ou não')
+      return false;
     }
 
     // Enviando o valor da nova input
@@ -75,35 +111,38 @@
         emailServer: emailVar,
         senhaServer: senhaVar,
         confirmacaoSenhaServer: confirmacaoSenhaVar,
-        idadeServer: idadeVar
+        idadeServer: idadeVar,
+        jogaAindaServer: JogaAinda
       }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-        //   cardErro.style.display = "block";
+          //   cardErro.style.display = "block";
 
           alert("aaaa")
 
-        //   mensagem_erro.innerHTML =
-        //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          //   mensagem_erro.innerHTML =
+          //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
-          
-          
+
+
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        
+
       });
 
     return false;
-  }
+ 
+    }
+
 </script>
