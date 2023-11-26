@@ -1,0 +1,116 @@
+
+@font-face {
+    font-family: "Fonte_Site";
+    src: url(./Assets/RobotoMono-VariableFont_wght.ttf);
+}
+
+
+.header {
+    background-color: #495560;
+    display: flex;
+    margin: 0px;
+    /* padding: 0 60px; */
+    height: 10vh;
+    top: 0;
+    left: 0;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 100%;
+    width: 350px;
+    margin-right: 30px;
+    transition: 0.7s;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+body {
+    height: 100vhad;
+    width: 100%;
+    font-family: "Fonte_Site";
+    margin: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.Logo:hover {
+    transform: scale(1.05);
+}
+
+.barraLateral {
+    background-color: #3E7EA3;
+    width: 23vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    position: fixed;
+}
+
+.botaoSair {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 0px;
+}
+
+.botões-lateral {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+a:hover {
+    color: rgb(0, 0, 0);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.img-sair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+}
+
+.metadeTelaRanking {
+    position: fixed;
+    background-color: #ffffff;
+    width: 45%;
+    height: 100%;
+    margin-left: 115vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.metadeTelaMetricas {
+    position: fixed;
+    background-color: #ffffff;
+    width: 45%;
+    height: 100%;
+    margin-left: 23vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    
+}
