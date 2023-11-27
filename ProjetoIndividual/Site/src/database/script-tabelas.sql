@@ -6,116 +6,79 @@
 comandos para mysql - banco local - ambiente de desenvolvimento
 */
 
-CREATE DATABASE aquatech;
+/*Fazer data  hora de inserção dos dados para a tabela associativa não ter apenas dois campos*/
 
-USE aquatech;
+create database projetoindi;
 
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14)
+use projetoindi;
+
+create table usuario(
+idUsuario int primary key auto_increment,
+Nome varchar(45),
+Email varchar(70),
+senha varchar(45),
+IdadeAtual int,
+JogaAinda CHAR(3));
+
+create table missoes(
+idMissao int primary key auto_increment,
+descMissao varchar(45)
 );
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+create table missoes_usuario(
+fkUsuario int,
+fkMissao int,
+primary key (fkusuario, fkmissao));
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
-);
+alter table missoes_usuario add constraint fkmissoesUser foreign key (fkUsuario) references usuario(idusuario);
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+alter table missoes_usuario add constraint fkmissao foreign key (fkmissao) references missoes(idmissao);
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+create table caracteristicas(
+idCaracteristicas int primary key auto_increment,
+dtnasc Date,
+CampeonatosGanhos int,
+quantosanosjoga int,
+NivelHabilidade Varchar(45),
+fkUsuario int,
+foreign key (fkusuario) references usuario(idusuario));
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
+select * from usuario;
 
-insert into empresa (razao_social, cnpj) values ('Empresa 1', '00000000000000');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
 
-/*
-comando para sql server - banco remoto - ambiente de produção
-*/
+insert into missoes_usuario values
+(1,1);
 
-CREATE TABLE empresa (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	razao_social VARCHAR(50),
-	cnpj CHAR(14)
-);
+desc missoes_usuario;
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT FOREIGN KEY REFERENCES empresa(id)
-);
+alter table missoes_usuario drop column pontuacaototal;
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT FOREIGN KEY REFERENCES usuario(id)
-);
+insert into missoes values
+(null, 'missão 1 ping pong', null);
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY IDENTITY(1,1),
-	descricao VARCHAR(300),
-	fk_empresa INT FOREIGN KEY REFERENCES empresa(id)
-);
+select * from missoes;
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+select * from missoes_usuario;
 
-CREATE TABLE medida (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT FOREIGN KEY REFERENCES aquario(id)
-);
+insert into missoes values
+(null, 'missão 2 ping pong', null);
 
-insert into empresa (razao_social, cnpj) values ('Empresa 1', '00000000000000');
+insert into missoes values
+(null, 'missão 3 ping pong', null),
+(null, 'missão 4 ping pong', null),
+(null, 'missão 5 ping pong', null),
+(null, 'missão 6 ping pong', null);
 
-/*
-comandos para criar usuário em banco de dados azure, sqlserver,
-com permissão de insert + update + delete + select
-*/
+/*selects utilizados para exibição dos dados*/
 
-CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
-WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
-DEFAULT_SCHEMA = dbo;
+INSERT INTO usuario (nome, email, senha, idadeatual, jogaAinda) VALUES ('${nome}', '${email}', '${senha}', '${idade}', '${Joga}');
 
-EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+SELECT idUsuario, nome, email, senha, idadeatual, jogaainda  FROM usuario WHERE email = '${email}' AND senha = '${senha}';
 
-EXEC sys.sp_addrolemember @rolename = N'db_datareader',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+INSERT INTO caracteristicas (dtnasc, CampeonatosGanhos, NivelHabilidade, QuantosAnosjoga, fkusuario) VALUES ('${dtnasc}', '${CampeonatosGanhos}', '${NivelHabilidade}', '${QuantosAnosjoga}', ${fkUsuario});
+
+select count(fkUsuario) * 1000 as pontuacao, nome from missoes_usuario join usuario on fkusuario = idusuario group by fkUsuario order by pontuacao desc limit 5;
+
+select count(fkUsuario) as qtdmissoes, fkusuario, nome from missoes_usuario join usuario on idusuario = fkusuario  group by fkusuario order by count(fkusuario) desc limit 5;
+
+select * from usuario;
