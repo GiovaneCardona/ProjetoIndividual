@@ -22,7 +22,45 @@ function cadastrar(nome, email, senha, idade, Joga) {
     return database.executar(instrucao);
 }
 
+function caracteristicas(dtnasc, CampeonatosGanhos, NivelHabilidade, QuantosAnosjoga, fkUsuario) {
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        INSERT INTO caracteristicas (dtnasc, CampeonatosGanhos, NivelHabilidade, QuantosAnosjoga, fkusuario) VALUES ('${dtnasc}', '${CampeonatosGanhos}', '${NivelHabilidade}', '${QuantosAnosjoga}', ${fkUsuario});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function mostrarRank() {
+    var instrucao = `
+    select count(fkUsuario) * 1000 as pontuacao, nome from missoes_usuario join usuario on fkusuario = idusuario group by fkUsuario order by pontuacao desc limit 5;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function mostrarMissoes(){
+    var instrucao = `
+    select count(fkUsuario) as qtdmissoes, fkusuario, nome from missoes_usuario join usuario on idusuario = fkusuario  group by fkusuario order by count(fkusuario) desc limit 5;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function maior50joga(){
+    var instrucao = `
+    select * from usuario;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    caracteristicas,
+    mostrarRank,
+    mostrarMissoes,
+    maior50joga
 };

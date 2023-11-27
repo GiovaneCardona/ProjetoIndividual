@@ -12,4 +12,21 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/caracteristicas", function (req, res) {
+    usuarioController.caracteristicas(req, res);
+});
+
+router.get("/mostrarRank", function (req, res) {
+    usuarioController.mostrarRank(req, res);
+});
+router.get("/mostrarMissoes", function (req, res) {
+    usuarioController.mostrarMissoes(req, res);
+});
+
+router.get("/maior50joga", function (req, res) {
+    usuarioController.maior50joga(req, res);
+});
+
+
+
 module.exports = router;

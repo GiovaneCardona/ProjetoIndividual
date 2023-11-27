@@ -29,7 +29,7 @@ function autenticar(req, res) {
                                 nome: resultadoAutenticar[0].nome,
                                 senha: resultadoAutenticar[0].senha,
                                 idade: resultadoAutenticar[0].idadeinicio
-                                
+
                             });
                         } else {
                             res.status(204).json({ aquarios: [] });
@@ -92,7 +92,114 @@ function cadastrar(req, res) {
     }
 }
 
+function caracteristicas(req, res) {
+    console.log(req.body)
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var dtnasc = req.body.dtnasc;
+    var CampeonatosGanhos = req.body.CampeonatosGanhos;
+    var QuantosAnosJoga = req.body.QuantosAnosJoga;
+    var NivelHabilidade = req.body.NivelHabilidade;
+    var fkUsuario = req.body.fkUsuario;
+
+    // Faça as validações dos valores
+    if (dtnasc == undefined) {
+        console.log('dtnasc undefined')
+        res.status(400).send("Sua dtnasc está undefined!");
+    } else if (CampeonatosGanhos == undefined) {
+        console.log('camps undefined')
+        res.status(400).send("Seu Campeonatos Ganhos está undefined!");
+    } else if (NivelHabilidade == undefined) {
+        console.log('habilidade undefined')
+        res.status(400).send("Seu Nivel de habilidade está undefined!");
+    } else if (fkUsuario == undefined) {
+        console.log('fkuser undefined')
+        res.status(400).send("Sua fkUsuario está undefined!");
+    } else if (QuantosAnosJoga == undefined) {
+        console.log('anos undefined')
+        res.status(400).send("Seu tempo de jogo está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.caracteristicas(dtnasc, CampeonatosGanhos, NivelHabilidade, QuantosAnosJoga, fkUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function mostrarRank(req, res) {
+
+        usuarioModel.mostrarRank()
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                    if(resultado.ok){
+                        console.log(resultado.json());
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+    function mostrarMissoes(req, res) {
+
+        usuarioModel.mostrarMissoes()
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                    if(resultado.ok){
+                        console.log("aaaaaaaaaaaaaa", resultado.json());
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+    function maior50joga(req, res) {
+
+        usuarioModel.maior50joga()
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                    if(resultado.ok){
+                        console.log("aaaaaaaaaaaaaa", resultado.json());
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    caracteristicas,
+    mostrarRank,
+    mostrarMissoes,
+    maior50joga
 }

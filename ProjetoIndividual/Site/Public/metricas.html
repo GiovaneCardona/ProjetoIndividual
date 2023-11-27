@@ -1,61 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styleMetricas.css">
 </head>
+
 <body>
     <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 
 
 
-<body>
-    <div class="header">
-        <a href="#">
-            <div class="Logo">
-                <img style=" margin: 0; height: 100%;" class="imagem_raquete"
-                    src="./Assets/images-removebg-preview (8).png" alt="">
-                <h1 style="color: white;">PongPalace</h1>
+    <body>
+        <div class="header">
+            <a href="#">
+                <div class="Logo">
+                    <img style=" margin: 0; height: 100%;" class="imagem_raquete"
+                        src="./Assets/images-removebg-preview (8).png" alt="">
+                    <h1 style="color: white;">PongPalace</h1>
+                </div>
+            </a>
+        </div>
+        <div class="barraLateral">
+            <div class="oláUser">
+                <p id="nome_user"></p>
             </div>
-        </a>
-    </div>
-    <div class="barraLateral">
-        <div class="oláUser">
-            <p id="nome_user"></p>
-        </div>
-        
 
-        <div class="botões-lateral">
-           <a href="Missoes.html"> <p style="margin: 15px;">Missões</p></a>
-           
-           
-        </div>
 
-        <div class="botaoSair">
-            <div class="img-sair">
-              <a href=""> <img style="height: 30px; width: 30px;" src="./Assets/images-removebg-preview (10).png" alt=""></a> 
+            <div class="botões-lateral">
+                <a href="Missoes.html">
+                    <p style="margin: 15px;">Missões</p>
+                </a>
+
+
             </div>
-           <a href=""> <p >Sair</p></a>
-           
-        </div>
-    </div>
 
-        <div class="metadeTelaRanking">
-        
+            <div class="botaoSair">
+                <div class="img-sair">
+                    <a href=""> <img style="height: 30px; width: 30px;" src="./Assets/images-removebg-preview (10).png"
+                            alt=""></a>
+                </div>
+                <a href="">
+                    <p>Sair</p>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="metadeTelaForm">
+            <div class="container">
+                <h1 style="color: #ffffff;">Questionário Pong</h1>
+                <input class="inputs" placeholder="Data de Nascimento" type="date" id="input_dtnasc">
+                <input class="inputs" placeholder="Campeonatos ganhos" type="text" id="input_camps">
+                <input class="inputs" placeholder="Quanto tempo joga" type="number" id="input_tempo">
+                <input class="inputs" placeholder="Nivel de habilidade" type="text" id="input_nivel">
+                <br><br>
+
+                <div style="display: flex; flex-direction: row; gap: 10px;">
+                    <button class="botao" onclick="caracteristicas()">Enviar</button><br>
+                    <a href="index.html"><button class="botao">Voltar</button></a>
+                </div>
+
+
+            </div>
+
+            <img style="width: 80%; height: 90%; border-radius: 30px; position: absolute; z-index: -1;"
+                src="./Assets/imagemFormulario.jpg" alt="">
+
         </div>
 
         <div class="metadeTelaMetricas">
-        
+
+            <div class="metricasEsquerda">
+                <div id="maior50Exibir" class="quadradosMetricas"></div>
+                <div id="menor50Exibir" class="quadradosMetricas"></div>
+
+            </div>
+            <div class="metricasDireita">
+                <div class="quadradosMetricas"></div>
+                <div class="quadradosMetricas"></div>
+
+            </div>
         </div>
- 
+        <div class="divRankings">
+
+            <div id="rankPontosID" class="rankPontos">
+                <h4 style="margin-left: 20px;">Ranking Pontos</h4>
+            </div>
+
+            <div id="rankMissoesID" class="rankMissoes">
+                <h4 style="margin-left: 20px;">Ranking Missoes</h4>
+            </div>
+
+
+        </div>
+
+    </body>
+
+    </html>
 </body>
 
 </html>
-</body>
-</html>
 <script>
-    document.getElementById("nome_user").innerHTML = "Olá " + sessionStorage.NOME_USUARIO
+    document.getElementById("nome_user").innerHTML = "Olá " + sessionStorage.NOME_USUARIO + "!"
+
+
+    function caracteristicas() {
+        var dtnasc = input_dtnasc.value;
+        var camps = input_camps.value;
+        var anos = input_tempo.value;
+        var habilidade = input_nivel.value;
+
+
+        fetch("/usuarios/caracteristicas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                dtnasc: dtnasc,
+                CampeonatosGanhos: camps,
+                QuantosAnosJoga: anos,
+                NivelHabilidade: habilidade,
+                fkUsuario: sessionStorage.ID_USUARIO
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log('passamo carai')
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
+
+
+    fetch("/usuarios/mostrarRank", {
+        method: "get",
+    }
+    ).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            resposta.json().then(resposta => {
+                plotar2(resposta);
+                console.log(resposta)
+            })
+
+        } else {
+            resposta.text().then(texto => {
+                console.error(texto);
+
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+
+    fetch("/usuarios/mostrarMissoes", {
+        method: "get",
+    }
+    ).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            resposta.json().then(resposta => {
+                plotar(resposta);
+                console.log(resposta)
+            })
+
+
+
+        } else {
+            resposta.text().then(texto => {
+                console.error(texto);
+
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+
+
+
+
+    fetch("/usuarios/maior50joga", {
+        method: "get",
+    }
+    ).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            resposta.json().then(resposta => {
+                plotar3(resposta);
+                console.log(resposta)
+            })
+
+
+
+        } else {
+            resposta.text().then(texto => {
+                console.error(texto);
+
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+
+
+
+    function plotar(resposta) {
+        console.log(resposta)
+
+        for (var i = 0; i < resposta.length; i++) {
+            rankMissoesID.innerHTML += `${i + 1}º - ${resposta[i].nome} ${resposta[i].qtdmissoes}<br>`
+        }
+    }
+
+    function plotar2(resposta) {
+        console.log(resposta)
+
+        for (var i = 0; i < resposta.length; i++) {
+            rankPontosID.innerHTML += `${i + 1}º - ${resposta[i].nome} ${resposta[i].pontuacao}<br>`
+        }
+    }
+
+
+    function plotar3(resposta) {
+        var quantidademaior50 = 0
+        var quantidademenor15 = 0
+        var usuariostotal = 0
+        for (var i = 0; i < resposta.length; i++) {
+            if (resposta[i].IdadeAtual >= 50) {
+                quantidademaior50++
+            } else if (resposta[i].IdadeAtual <= 15) {
+                quantidademenor15++
+            }
+
+            usuariostotal++
+        }
+        console.log(resposta)
+        maior50Exibir.innerHTML = `Você sabia que ${quantidademaior50} dos nossos ${usuariostotal} usuarios Jogam Tênis de mesa e têm mais de 50 anos? `
+        menor50Exibir.innerHTML = `Você sabia que ${quantidademenor15} dos nossos ${usuariostotal} usuarios Jogam Tênis de mesa e têm menos de 15 anos? `
+    }
+
+
 </script>
