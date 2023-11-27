@@ -15,8 +15,9 @@
 
 
     <body>
+        
         <div class="header">
-            <a href="#">
+            <a href="index.html">
                 <div class="Logo">
                     <img style=" margin: 0; height: 100%;" class="imagem_raquete"
                         src="./Assets/images-removebg-preview (8).png" alt="">
@@ -40,10 +41,10 @@
 
             <div class="botaoSair">
                 <div class="img-sair">
-                    <a href=""> <img style="height: 30px; width: 30px;" src="./Assets/images-removebg-preview (10).png"
+                    <a href="index.html"> <img style="height: 30px; width: 30px;" src="./Assets/images-removebg-preview (10).png"
                             alt=""></a>
                 </div>
-                <a href="">
+                <a href="index.html">
                     <p>Sair</p>
                 </a>
 
@@ -95,26 +96,27 @@
                 <h4 style="margin-left: 20px;">Ranking Missoes</h4>
             </div>
 
-
+            
         </div>
-
+        
     </body>
-
+    
     </html>
 </body>
 
 </html>
 <script>
     document.getElementById("nome_user").innerHTML = "Olá " + sessionStorage.NOME_USUARIO + "!"
-
+    
 
     function caracteristicas() {
         var dtnasc = input_dtnasc.value;
         var camps = input_camps.value;
         var anos = input_tempo.value;
         var habilidade = input_nivel.value;
-
-
+        
+        
+        
         fetch("/usuarios/caracteristicas", {
             method: "POST",
             headers: {
@@ -128,37 +130,36 @@
                 fkUsuario: sessionStorage.ID_USUARIO
             }),
         })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+            
                 if (resposta.ok) {
-                    console.log('passamo carai')
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-
+                
             });
-
-        return false;
-    }
-
-
-
-    fetch("/usuarios/mostrarRank", {
-        method: "get",
-    }
-    ).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
-
-        if (resposta.ok) {
-            resposta.json().then(resposta => {
-                plotar2(resposta);
-                console.log(resposta)
-            })
-
+            
+            return false;
+        }
+        
+        
+        
+        fetch("/usuarios/mostrarRank", {
+            method: "get",
+        }
+        ).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+            
+            if (resposta.ok) {
+                resposta.json().then(resposta => {
+                    plotar2(resposta);
+                    console.log(resposta)
+                })
+                
         } else {
             resposta.text().then(texto => {
                 console.error(texto);
@@ -182,13 +183,13 @@
                 plotar(resposta);
                 console.log(resposta)
             })
-
+            
 
 
         } else {
             resposta.text().then(texto => {
                 console.error(texto);
-
+                
             });
         }
 
@@ -199,13 +200,13 @@
 
 
 
-
+    
     fetch("/usuarios/maior50joga", {
         method: "get",
     }
     ).then(function (resposta) {
         console.log("ESTOU NO THEN DO entrar()!")
-
+        
         if (resposta.ok) {
             resposta.json().then(resposta => {
                 plotar3(resposta);
@@ -232,6 +233,7 @@
         console.log(resposta)
 
         for (var i = 0; i < resposta.length; i++) {
+           
             rankMissoesID.innerHTML += `${i + 1}º - ${resposta[i].nome} ${resposta[i].qtdmissoes}<br>`
         }
     }
