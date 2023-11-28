@@ -28,6 +28,7 @@ descMissao varchar(45)
 create table missoes_usuario(
 fkUsuario int,
 fkMissao int,
+datahora, datetime,
 primary key (fkusuario, fkmissao));
 
 alter table missoes_usuario add constraint fkmissoesUser foreign key (fkUsuario) references usuario(idusuario);
