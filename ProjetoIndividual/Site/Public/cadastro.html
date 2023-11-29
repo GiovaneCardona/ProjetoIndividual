@@ -87,7 +87,7 @@
     } else if (confirmacaoSenhaVar != senhaVar) {
       alert('As suas senhas não podem ser diferentes')
       return false;
-    } else if (idadeVar < 10) {
+    } else if (idadeVar <= 10) {
       alert('Você precisa ter pelo menos 10 anos para se cadastrar!')
       return false;
     } else if (idadeVar > 105) {
